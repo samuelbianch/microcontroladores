@@ -1,0 +1,279 @@
+CCS PCM C Compiler, Version 4.104, 5967               01-ago-23 19:16
+
+               Filename: D:\Microcontroladores\semafaro_pedestre\main.lst
+
+               ROM used: 161 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 7 (2%) at main() level
+                         7 (2%) worst case
+               Stack:    0 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=8 
+....................  
+.................... #FUSES NOWDT 
+.................... #FUSES HS 
+.................... #FUSES NOPUT 
+.................... #FUSES NOPROTECT 
+.................... #FUSES NODEBUG 
+.................... #FUSES BROWNOUT 
+.................... #FUSES NOLVP 
+.................... #FUSES NOCPD 
+.................... #FUSES NOWRT 
+....................  
+.................... #use delay(clock=20000000) 
+....................  
+.................... void main() 
+.................... { 
+*
+0004:  CLRF   04
+0005:  BCF    03.7
+0006:  MOVLW  1F
+0007:  ANDWF  03,F
+0008:  BSF    03.5
+0009:  BSF    1F.0
+000A:  BSF    1F.1
+000B:  BSF    1F.2
+000C:  BCF    1F.3
+000D:  MOVLW  07
+000E:  MOVWF  1C
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+0012:  BSF    03.5
+0013:  BSF    1F.0
+0014:  BSF    1F.1
+0015:  BSF    1F.2
+0016:  BCF    1F.3
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+0017:  BCF    1F.6
+0018:  BCF    03.5
+0019:  BCF    1F.6
+001A:  BCF    1F.7
+001B:  BSF    03.5
+001C:  BCF    1F.7
+001D:  BCF    03.5
+001E:  BSF    1F.0
+....................    setup_psp(PSP_DISABLED); 
+001F:  BSF    03.5
+0020:  BCF    09.4
+....................    setup_spi(SPI_SS_DISABLED); 
+0021:  BCF    03.5
+0022:  BCF    14.5
+0023:  BCF    20.5
+0024:  MOVF   20,W
+0025:  BSF    03.5
+0026:  MOVWF  07
+0027:  BCF    03.5
+0028:  BSF    20.4
+0029:  MOVF   20,W
+002A:  BSF    03.5
+002B:  MOVWF  07
+002C:  BCF    03.5
+002D:  BCF    20.3
+002E:  MOVF   20,W
+002F:  BSF    03.5
+0030:  MOVWF  07
+0031:  MOVLW  01
+0032:  BCF    03.5
+0033:  MOVWF  14
+0034:  MOVLW  00
+0035:  BSF    03.5
+0036:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+0037:  MOVF   01,W
+0038:  ANDLW  C7
+0039:  IORLW  08
+003A:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+003B:  BCF    03.5
+003C:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+003D:  MOVLW  00
+003E:  MOVWF  78
+003F:  MOVWF  12
+0040:  MOVLW  00
+0041:  BSF    03.5
+0042:  MOVWF  12
+....................    setup_comparator(NC_NC_NC_NC); 
+0043:  MOVLW  07
+0044:  MOVWF  1C
+0045:  MOVF   05,W
+0046:  MOVWF  05
+0047:  MOVLW  10
+0048:  MOVWF  77
+0049:  DECFSZ 77,F
+004A:  GOTO   049
+004B:  NOP
+004C:  MOVF   1C,W
+004D:  BCF    03.5
+004E:  BCF    0D.6
+....................    setup_vref(FALSE); 
+004F:  BSF    03.5
+0050:  CLRF   1D
+....................  
+....................    while(true){ 
+....................       // D0 = Vermelho 
+....................       // D1 = Amarelo 
+....................       // D2 = Verde1 
+....................        
+....................       // B0 = Vermelho 
+....................       // B1 = Amarelo 
+....................       // B2 = Verde 
+....................          
+....................       output_low(PIN_D1); 
+0051:  BCF    08.1
+0052:  BCF    03.5
+0053:  BCF    08.1
+....................       output_low(PIN_D2); 
+0054:  BSF    03.5
+0055:  BCF    08.2
+0056:  BCF    03.5
+0057:  BCF    08.2
+....................       output_low(PIN_D3); 
+0058:  BSF    03.5
+0059:  BCF    08.3
+005A:  BCF    03.5
+005B:  BCF    08.3
+....................       output_low(PIN_D4); 
+005C:  BSF    03.5
+005D:  BCF    08.4
+005E:  BCF    03.5
+005F:  BCF    08.4
+....................       output_low(PIN_D5); 
+0060:  BSF    03.5
+0061:  BCF    08.5
+0062:  BCF    03.5
+0063:  BCF    08.5
+....................       output_low(PIN_D6); 
+0064:  BSF    03.5
+0065:  BCF    08.6
+0066:  BCF    03.5
+0067:  BCF    08.6
+....................       output_low(PIN_D7); 
+0068:  BSF    03.5
+0069:  BCF    08.7
+006A:  BCF    03.5
+006B:  BCF    08.7
+....................       output_low(PIN_B0); 
+006C:  BSF    03.5
+006D:  BCF    06.0
+006E:  BCF    03.5
+006F:  BCF    06.0
+....................       output_low(PIN_B1); 
+0070:  BSF    03.5
+0071:  BCF    06.1
+0072:  BCF    03.5
+0073:  BCF    06.1
+....................       output_low(PIN_B2); 
+0074:  BSF    03.5
+0075:  BCF    06.2
+0076:  BCF    03.5
+0077:  BCF    06.2
+....................       output_low(PIN_B3); 
+0078:  BSF    03.5
+0079:  BCF    06.3
+007A:  BCF    03.5
+007B:  BCF    06.3
+....................       output_low(PIN_B4); 
+007C:  BSF    03.5
+007D:  BCF    06.4
+007E:  BCF    03.5
+007F:  BCF    06.4
+....................       output_low(PIN_B5); 
+0080:  BSF    03.5
+0081:  BCF    06.5
+0082:  BCF    03.5
+0083:  BCF    06.5
+....................       output_low(PIN_B6); 
+0084:  BSF    03.5
+0085:  BCF    06.6
+0086:  BCF    03.5
+0087:  BCF    06.6
+....................       output_low(PIN_B7); 
+0088:  BSF    03.5
+0089:  BCF    06.7
+008A:  BCF    03.5
+008B:  BCF    06.7
+....................        
+....................       /*output_high(PIN_B0); // Acende Luz Vermelha B 
+....................       output_high(PIN_D0); // Acende Luz Vermelha D 
+....................       delay_ms(1000); // atraso de 1s ou 1000 milesegundos 
+....................       output_low(PIN_B0); // Apaga Luz Vermelha B 
+....................       output_high(PIN_B2); // Acende Luz Verde B 
+....................       delay_ms(5000); // Espera 5s 
+....................       output_low(PIN_B2); // Apaga Luz B verde 
+....................       output_high(PIN_B1); // Acende Luz B Amarela 
+....................       delay_ms(1000); 
+....................       output_low(PIN_B1); // Apaga Luz Amarela B 
+....................       output_high(PIN_B0); // Acende Luz Vermelha B 
+....................       delay_ms(1000); 
+....................       output_low(PIN_D0); // Apaga Luz Vermelha D 
+....................       output_high(PIN_D2); // Acende Luz Verde D 
+....................       delay_ms(5000); // atraso de 5s ou 5000 milesegundos 
+....................       output_low(PIN_D2); // Apaga Luz Verde D 
+....................       output_high(PIN_D1); // Acende Luz Amarela D 
+....................       delay_ms(1000);*/ 
+....................        
+....................       //output_high(PIN_D2); // Acende Luz Verde 
+....................       //output_high(PIN_B0); 
+....................        
+....................       /*if(input(PIN_B7 != 0)){ 
+....................          delay_ms(4000); 
+....................          output_low(PIN_D2); 
+....................          delay_ms(1000); 
+....................          output_low(PIN_B0); 
+....................          output_high(PIN_B1); 
+....................          delay_ms(4000); 
+....................          output_low(PIN_B1); 
+....................          for (int i=0; i<4; i++) { 
+....................             output_low(PIN_B0); 
+....................             delay_ms(1000); 
+....................              
+....................          } 
+....................       }*/ 
+....................        
+....................       output_high(PIN_B3); 
+008C:  BSF    03.5
+008D:  BCF    06.3
+008E:  BCF    03.5
+008F:  BSF    06.3
+....................        if(input(PIN_A3) == 0){ 
+0090:  BSF    03.5
+0091:  BSF    05.3
+0092:  BCF    03.5
+0093:  BTFSC  05.3
+0094:  GOTO   09A
+....................          output_high(PIN_D7); 
+0095:  BSF    03.5
+0096:  BCF    08.7
+0097:  BCF    03.5
+0098:  BSF    08.7
+....................        } else { 
+0099:  GOTO   09E
+....................          output_low(PIN_D7); 
+009A:  BSF    03.5
+009B:  BCF    08.7
+009C:  BCF    03.5
+009D:  BCF    08.7
+....................        } 
+....................        
+....................        
+....................    } 
+009E:  BSF    03.5
+009F:  GOTO   051
+.................... } 
+....................  
+....................  
+00A0:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F7A   HS NOWDT NOPUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT

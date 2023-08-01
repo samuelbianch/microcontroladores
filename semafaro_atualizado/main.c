@@ -26,13 +26,13 @@ void main()
    setup_vref(FALSE);
 
    while(true){
-        // D0 = Vermelho
-        // D1 = Amarelo
-        // D2 = Verde1
- 
-        // B0 = Vermelho
-        // B1 = Amarelo
-        // B2 = Verde
+      // D0 = Vermelho
+      // D1 = Amarelo
+      // D2 = Verde1
+      
+      // B0 = Vermelho
+      // B1 = Amarelo
+      // B2 = Verde
         
       output_low(PIN_D1);
       output_low(PIN_D2);

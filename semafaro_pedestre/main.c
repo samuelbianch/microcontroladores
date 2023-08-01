@@ -26,13 +26,13 @@ void main()
    setup_vref(FALSE);
 
    while(true){
-        // D0 = Vermelho
-        // D1 = Amarelo
-        // D2 = Verde1
- 
-        // B0 = Vermelho
-        // B1 = Amarelo
-        // B2 = Verde
+      // D0 = Vermelho
+      // D1 = Amarelo
+      // D2 = Verde1
+      
+      // B0 = Vermelho
+      // B1 = Amarelo
+      // B2 = Verde
         
       output_low(PIN_D1);
       output_low(PIN_D2);
@@ -50,7 +50,7 @@ void main()
       output_low(PIN_B6);
       output_low(PIN_B7);
       
-      output_high(PIN_B0); // Acende Luz Vermelha B
+      /*output_high(PIN_B0); // Acende Luz Vermelha B
       output_high(PIN_D0); // Acende Luz Vermelha D
       delay_ms(1000); // atraso de 1s ou 1000 milesegundos
       output_low(PIN_B0); // Apaga Luz Vermelha B
@@ -67,7 +67,35 @@ void main()
       delay_ms(5000); // atraso de 5s ou 5000 milesegundos
       output_low(PIN_D2); // Apaga Luz Verde D
       output_high(PIN_D1); // Acende Luz Amarela D
-      delay_ms(1000);
+      delay_ms(1000);*/
+      
+      //output_high(PIN_D2); // Acende Luz Verde
+      //output_high(PIN_B0);
+      
+      /*if(input(PIN_B7 != 0)){
+         delay_ms(4000);
+         output_low(PIN_D2);
+         delay_ms(1000);
+         output_low(PIN_B0);
+         output_high(PIN_B1);
+         delay_ms(4000);
+         output_low(PIN_B1);
+         for (int i=0; i<4; i++) {
+            output_low(PIN_B0);
+            delay_ms(1000);
+            
+         }
+      }*/
+      
+      output_high(PIN_B3);
+       if(input(PIN_A3) == 0){
+         output_high(PIN_D7);
+       } else {
+         output_low(PIN_D7);
+       }
+      
+      
    }
 }
+
 
