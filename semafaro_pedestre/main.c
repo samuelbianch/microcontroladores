@@ -1,4 +1,5 @@
 #include <16F877A.h>
+
 #device adc=8
 
 #FUSES NOWDT
@@ -13,6 +14,7 @@
 
 #use delay(clock=20000000)
 
+
 void main()
 {
    setup_adc_ports(NO_ANALOGS);
@@ -24,6 +26,21 @@ void main()
    setup_timer_2(T2_DISABLED,0,1);
    setup_comparator(NC_NC_NC_NC);
    setup_vref(FALSE);
+   
+   output_low(PIN_D0);
+   output_low(PIN_D1);
+   output_low(PIN_D3);
+   output_low(PIN_D4);
+   output_low(PIN_D5);
+   output_low(PIN_D6);
+   output_low(PIN_D7);
+   output_low(PIN_B0);
+   output_low(PIN_B2);
+   output_low(PIN_B3);
+   output_low(PIN_B4);
+   output_low(PIN_B5);
+   output_low(PIN_B6);
+   output_low(PIN_B7);
 
    while(true){
       // D0 = Vermelho
@@ -33,68 +50,35 @@ void main()
       // B0 = Vermelho
       // B1 = Amarelo
       // B2 = Verde
-        
-      output_low(PIN_D1);
-      output_low(PIN_D2);
-      output_low(PIN_D3);
-      output_low(PIN_D4);
-      output_low(PIN_D5);
-      output_low(PIN_D6);
-      output_low(PIN_D7);
-      output_low(PIN_B0);
-      output_low(PIN_B1);
-      output_low(PIN_B2);
-      output_low(PIN_B3);
-      output_low(PIN_B4);
-      output_low(PIN_B5);
-      output_low(PIN_B6);
-      output_low(PIN_B7);
       
-      /*output_high(PIN_B0); // Acende Luz Vermelha B
-      output_high(PIN_D0); // Acende Luz Vermelha D
-      delay_ms(1000); // atraso de 1s ou 1000 milesegundos
-      output_low(PIN_B0); // Apaga Luz Vermelha B
-      output_high(PIN_B2); // Acende Luz Verde B
-      delay_ms(5000); // Espera 5s
-      output_low(PIN_B2); // Apaga Luz B verde
-      output_high(PIN_B1); // Acende Luz B Amarela
-      delay_ms(1000);
-      output_low(PIN_B1); // Apaga Luz Amarela B
-      output_high(PIN_B0); // Acende Luz Vermelha B
-      delay_ms(1000);
-      output_low(PIN_D0); // Apaga Luz Vermelha D
-      output_high(PIN_D2); // Acende Luz Verde D
-      delay_ms(5000); // atraso de 5s ou 5000 milesegundos
-      output_low(PIN_D2); // Apaga Luz Verde D
-      output_high(PIN_D1); // Acende Luz Amarela D
-      delay_ms(1000);*/
       
-      //output_high(PIN_D2); // Acende Luz Verde
-      //output_high(PIN_B0);
-      
-      /*if(input(PIN_B7 != 0)){
-         delay_ms(4000);
+      output_high(PIN_D2); // Acende Luz Verde
+      output_high(PIN_B1); // Luz vermelha para os Pedestres
+      //delay_ms(1000);
+      if(!input(PIN_B0)){
+         delay_ms(10000);
          output_low(PIN_D2);
-         delay_ms(1000);
-         output_low(PIN_B0);
-         output_high(PIN_B1);
-         delay_ms(4000);
+         output_high(PIN_D1);
+         delay_ms(3000);
+         output_low(PIN_D1);
          output_low(PIN_B1);
-         for (int i=0; i<4; i++) {
-            output_low(PIN_B0);
-            delay_ms(1000);
-            
+         output_high(PIN_D0);
+         output_high(PIN_B2);
+         delay_ms(10000);
+         int i = 0;
+         output_low(PIN_B2);
+         output_high(PIN_B1);
+         for(i=0; i<4; i++){
+            output_low(PIN_B1);
+            delay_ms(500);
+            output_high(PIN_B1);
+            delay_ms(500);
          }
-      }*/
-      
-      output_high(PIN_B3);
-       if(input(PIN_A3) == 0){
-         output_high(PIN_D7);
-       } else {
-         output_low(PIN_D7);
-       }
-      
-      
+         delay_ms(1000);
+         output_low(PIN_D0);
+         output_high(PIN_D2);
+         delay_ms(10000);
+      }
    }
 }
 
