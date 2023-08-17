@@ -55,7 +55,7 @@ void main()
       output_high(PIN_D2); // Acende Luz Verde
       output_high(PIN_B1); // Luz vermelha para os Pedestres
       //delay_ms(1000);
-      if(!input(PIN_B0)){
+      if(input(PIN_B0)){
          delay_ms(10000);
          output_low(PIN_D2);
          output_high(PIN_D1);

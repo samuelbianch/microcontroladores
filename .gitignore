@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+/DIYpack25ep
+/Fábio Pereira
+/K150 gravadora
+
 # Object files
 *.o
 *.ko
