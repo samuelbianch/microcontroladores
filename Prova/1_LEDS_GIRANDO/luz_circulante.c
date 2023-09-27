@@ -1,0 +1,84 @@
+//#include "D:\Microcontroladores\Prova\1_LEDS_GIRANDO\luz_circulante.h"
+
+#include <16F877A.h>
+#device adc=8
+
+#FUSES NOWDT                    //No Watch Dog Timer
+#FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD)
+#FUSES NOPUT                    //No Power Up Timer
+#FUSES NOPROTECT                //Code not protected from reading
+#FUSES NODEBUG                  //No Debug mode for ICD
+#FUSES BROWNOUT                 //Reset when brownout detected
+#FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O
+#FUSES NOCPD                    //No EE protection
+#FUSES NOWRT                    //Program memory not write protected
+#FUSES RESERVED                 //Used to set the reserved FUSE bits
+
+#use delay(clock=20000000)
+
+
+void main()
+{
+
+   unsigned int valor = 1;
+   setup_adc_ports(AN0); // ajusta a porta A0 para entrada analógica
+   setup_adc(ADC_CLOCK_DIV_2);
+   setup_psp(PSP_DISABLED);
+   setup_spi(SPI_SS_DISABLED);
+   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1);
+   setup_timer_1(T1_DISABLED);
+   setup_timer_2(T2_DISABLED,0,1);
+   setup_comparator(NC_NC_NC_NC);
+   setup_vref(FALSE);
+   set_adc_channel(0);
+
+   
+   
+   output_low(PIN_D0);
+   output_low(PIN_D1);
+   output_low(PIN_D2);
+   output_low(PIN_D3);
+   output_low(PIN_D4);
+   output_low(PIN_D5);
+   output_low(PIN_D6);
+   output_low(PIN_D7);
+   
+   // TODO: USER CODE!!
+   
+   while(true){
+      valor = read_adc() * 0.039; // 10/255 = 0,0392 
+      
+      if(valor>10) valor = 10;
+      if(valor<=1) valor = 1;
+      
+      output_high(PIN_A5);
+      output_high(PIN_D0);
+      delay_ms(valor*100);
+      output_low(PIN_D0);
+      output_high(PIN_D1);
+      delay_ms(valor*100);
+      output_low(PIN_D1);
+      output_high(PIN_D2);
+      delay_ms(valor*100);
+      output_low(PIN_D2);
+      output_high(PIN_D3);
+      delay_ms(valor*100); 
+      
+      // Troca de Display
+      output_low(PIN_A5);
+      output_high(PIN_A4);
+      delay_ms(valor*100);
+      output_low(PIN_D3);
+      output_high(PIN_D4);
+      delay_ms(valor*100);
+      output_low(PIN_D4);
+      output_high(PIN_D5);
+      delay_ms(valor*100);
+      output_low(PIN_D5);
+      output_high(PIN_D0);
+      delay_ms(valor*100);
+      output_low(PIN_A4);
+      
+   }
+
+}
