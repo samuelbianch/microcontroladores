@@ -4,7 +4,7 @@
 #device adc=8
 
 #FUSES NOWDT                    //No Watch Dog Timer
-#FUSES XT                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD)
+#FUSES HS                       //High speed Osc (> 4mhz for PCM/PCH) (>10mhz for PCD)
 #FUSES NOPUT                    //No Power Up Timer
 #FUSES NOPROTECT                //Code not protected from reading
 #FUSES NODEBUG                  //No Debug mode for ICD
@@ -14,12 +14,12 @@
 #FUSES NOWRT                    //Program memory not write protected
 #FUSES RESERVED                 //Used to set the reserved FUSE bits
 
-#use delay(clock=4000000)
+#use delay(clock=20000000)
 
 #ifndef lcd_enable
- #define lcd_enable pin_A3 // pino enable do LCD
- #define lcd_rs pin_A5 // pino rs do LCD
- #define lcd_rw pin_A4 // pino rw do LCD
+ #define lcd_enable pin_E1 // pino enable do LCD
+ #define lcd_rs pin_E2 // pino rs do LCD
+ //#define lcd_rw pin_e2 // pino rw do LCD
  #define lcd_d4 pin_d4 // pino de dados d4 do LCD
  #define lcd_d5 pin_d5 // pino de dados d5 do LCD
  #define lcd_d6 pin_d6 // pino de dados d6 do LCD
@@ -33,8 +33,6 @@ void main()
 {
    unsigned char tmp = 0;
    int8 valor = 0;
-   char senha[] = "";
-   
    setup_adc_ports(AN0);
    setup_adc(ADC_CLOCK_DIV_2);
    setup_psp(PSP_DISABLED);
@@ -47,23 +45,18 @@ void main()
    lcd_ini(); // Inicializa LCD
    
    while(true){
-   
-    printf(lcd_escreve,"\fBem vindo!!\n\tSenha:");
-    delay_ms(1000);
-    tmp = tc_tecla(300);
-    senha = senha + tmp;
+    tmp = tc_tecla(10);
+    
     if (tmp == 'A'){
       valor = 100;
-    }
-    if (tmp>=48 && tmp<=57){
+    } else if (tmp>=48 && tmp<=57){
       valor = (int8)tmp - 48;
     } else {
       valor = 0;
     }
     
-    valor = valor * 10; // para ficar 10% - 20% - 30%....
     printf(lcd_escreve,"\fPotencia: %d%% \r\n", valor);
-    delay_ms(1000);
+    
     set_adc_channel(valor);
    }
 

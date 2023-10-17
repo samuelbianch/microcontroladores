@@ -1,0 +1,27 @@
+[PROJECT]
+Target=D:\Microcontroladores\Prova\2_Motor_Corrente_Continua\Moto_Corrente_Continua_Com_Teclado.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+Processor=0x877A
+[D:\Microcontroladores\Prova\2_Motor_Corrente_Continua\Moto_Corrente_Continua_Com_Teclado]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=D:\Microcontroladores\Prova\2_Motor_Corrente_Continua\Moto_Corrente_Continua_Com_Teclado.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=D:\Microcontroladores\Prova\2_Motor_Corrente_Continua\Moto_Corrente_Continua_Com_Teclado
+[Opened Files]
+1=..\Prova\2_Motor_Corrente_Continua\Moto_Corrente_Continua_Com_Teclado.c
+2=
+3=
+4=
+5=

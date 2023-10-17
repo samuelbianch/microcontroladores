@@ -1,0 +1,142 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004     @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+020-021 strtok.save
+022     @TRIS_C
+023     MAIN.tmp
+024-027 MAIN.senha
+028     MAIN.cont
+029.0   MAIN.senhaEstaCorreta
+02A-02D MAIN.senha_memoria
+02E     MAIN.i
+02F-030 write_ext_eeprom.address
+02F     lcd_ini.conta
+02F     tc_tecla.timeout
+02F     MAIN.@SCRATCH1
+02F     @PSTRINGR_173.@SCRATCH1
+02F     @PSTRINGC7_173.@SCRATCH1
+030     tc_tecla.to
+030     lcd_ini.@SCRATCH1
+030     MAIN.@SCRATCH2
+030     @PSTRINGR_173.@SCRATCH2
+030     @PSTRINGC7_173.@SCRATCH2
+031     @PRINTF_D_173.P1
+031     write_ext_eeprom.data
+031     @PSTRINGCN7_173.P1
+031     tc_tecla.k
+031     MAIN.@SCRATCH3
+031     @PSTRINGC7_173.@SCRATCH3
+032     @PRINTF_D_173.P1
+032-033 read_ext_eeprom.address
+032     tc_tecla.@SCRATCH1
+032     write_ext_eeprom.@SCRATCH1
+032     @PSTRINGCN7_173.@SCRATCH1
+033     @PSTRINGCN7_173.@SCRATCH2
+033     @PRINTF_D_173.@SCRATCH1
+034     read_ext_eeprom.data
+034     @PSTRINGCN7_173.@SCRATCH3
+034     @PRINTF_D_173.@SCRATCH2
+035     @I2C_READ_1.P1
+035.0   ext_eeprom_ready.ack
+035     read_ext_eeprom.@SCRATCH1
+035     @PRINTF_D_173.@SCRATCH3
+036     @I2C_WRITE_1.P1
+036     @I2C_READ_1.@SCRATCH1
+036     @PRINTF_D_173.@SCRATCH4
+037     @DIV88.P1
+037     lcd_escreve.c
+037     @I2C_READ_1.@SCRATCH2
+038     lcd_pos_xy.x
+038     @delay_ms1.P1
+038     @DIV88.P2
+039     lcd_pos_xy.y
+039     @DIV88.@SCRATCH1
+03A     lcd_pos_xy.endereco
+03B     lcd_pos_xy.@SCRATCH1
+03C     lcd_envia_byte.endereco
+03D     lcd_envia_byte.dado
+03E     lcd_envia_byte.@SCRATCH1
+03F     lcd_envia_nibble.dado
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0037  @delay_ms1
+0004  INI_LCD
+004C  lcd_envia_nibble
+0073  lcd_envia_byte
+0097  lcd_ini
+01D6  lcd_pos_xy
+01BC  lcd_escreve
+025A  tc_tecla
+03EE  @I2C_READ_1
+00E5  @I2C_WRITE_1
+00D8  init_ext_eeprom
+012F  ext_eeprom_ready
+016A  write_ext_eeprom
+0382  read_ext_eeprom
+050D  MAIN
+000C  @const224
+01F4  @PSTRINGCN7_173
+0242  @PSTRINGR_173
+0018  @const228
+044D  @DIV88
+0462  @PRINTF_D_173
+0021  @const235
+04C7  @PSTRINGC7_173
+002E  @const237
+050D  @cinit
+
+
+User Memory space: 
+
+User Memory space: 
+
+Project Directory:
+    D:\Microcontroladores\Trabalho_Fechadura\
+
+Project Files:
+    main.c
+    ..\..\Programas\PICC\Devices\16F877A.h
+    ..\..\Programas\PICC\Drivers\string.h
+    ..\..\Programas\PICC\Drivers\stddef.h
+    ..\..\Programas\PICC\Drivers\ctype.h
+    ..\..\Programas\PICC\Drivers\stdio.h
+    mod_lcd.c
+    kbd_ext_board2.c
+    2408.c
+
+Units:
+    D:\Microcontroladores\Trabalho_Fechadura\main (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX8:       main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.PJT
+    Call Tree:   main.tre
+    Statistics:  main.sta
