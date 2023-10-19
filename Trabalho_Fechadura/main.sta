@@ -1,29 +1,29 @@
 
-ROM used: 1759 (21%)
-          1759 (21%) including unused fragments
+ROM used: 1811 (22%)
+          1811 (22%) including unused fragments
 
           1 Average locations per line
-          6 Average locations per statement
+          5 Average locations per statement
 
-RAM used: 22 (6%) at main() level
+RAM used: 18 (5%) at main() level
           38 (10%) worst case
 
 Stack used: 5 worst case (out of 8 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  188    75  25  main.c
+  263   134  38  main.c
   326     0   0  ..\..\Programas\PICC\Devices\16F877A.h
   409     0   0  ..\..\Programas\PICC\Drivers\string.h
    28     0   0  ..\..\Programas\PICC\Drivers\stddef.h
    28     0   0  ..\..\Programas\PICC\Drivers\ctype.h
    37     0   0  ..\..\Programas\PICC\Drivers\stdio.h
    14     0   0  stdbool.h
-  165    75  25  mod_lcd.c
-   56   123  42  kbd_ext_board2.c
-   87    23   8  2408.c
+  165    75  21  mod_lcd.c
+   56   123  35  kbd_ext_board2.c
+   87    23   6  2408.c
 ----- -----
- 1338   296 Total
+ 1413   355 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -34,48 +34,52 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     65   4   2   463  4.2  lcd_ini
  Inline        4   186  5.5  lcd_pos_xy
 0     56   3   1   290  4.1  lcd_escreve
-0    296  17   4  3601  6.4  tc_tecla
+0    294  16   4  3601  6.4  tc_tecla
  Inline        3             @I2C_READ_1
 0     74   4   1             @I2C_WRITE_1
 0     13   1   0    32  1.0  init_ext_eeprom
 0     59   3   1    84  2.4  ext_eeprom_ready
 0     82   5   4   200  4.5  write_ext_eeprom
-0    203  12   4   336  5.2  read_ext_eeprom
-0     34   2   1   250  6.4  eTeclaValida
+0    203  11   4   336  5.2  read_ext_eeprom
+0     32   2   1   250  6.4  eTeclaValida
 0     24   1   1    70  1.5  desenhaTelaInicial
-0      9   1   0             @const219
+0      9   0   0             @const219
 0     70   4   3             @PSTRINGC7_173
 0     14   1   0  2075 10.6  @const221
-0     22   1   2    68  1.8  desenhaTelaUtilizar
-0     14   1   0             @const224
-0     78   4   4  2075 10.6  @PSTRINGCN7_173
-0     22   1   2             @PSTRINGR_173
-0     34   2   3    72  2.0  desenhaTelaCadastrar
-0     12   1   0             @const231
-0     21   1   3             @DIV88
-0    101   6   6             @PRINTF_D_173
-0    307  17  14  2065 10.6  MAIN
-0     10   1   0             @const246
-0      9   1   0             @const247
-0     13   1   0             @const248
-0      9   1   0             @const249
+0     12   1   0             @const225
+0    137   8  10  1013  7.5  confereSenha
+0     13   1   0             @const242
+0     11   1   0   631  7.0  @const243
+0      9   0   0  3627 10.0  @const244
+0     11   1   0  3627 10.0  @const245
+0    428  24  10  3658 10.0  MAIN
+0      6   0   0             @const254
+0      6   0   0             @const255
+0      8   0   0             @const256
+0      5   0   0             @const258
+0     16   1   0             @const260
+0      6   0   0             @const261
+0     13   1   0             @const262
+0      9   0   0             @const264
+0      8   0   0             @const265
+0     10   1   0             @const266
 
 Program metrics:
-    Functions               17
-    Statements              296
-    Comments                245
-    Volume (V)              18373
-    Difficilty (D)          80.7
-    Effort to implement (E) 1482880
-    Time to implement (T)   22 hours, 53 minutes
-    Est Delivered Bugs (B)  4
-    Cyclomatic Complexity   53
-    Maintainability (MI)    68
+    Functions               18
+    Statements              355
+    Comments                247
+    Volume (V)              30528
+    Difficilty (D)          99.9
+    Effort to implement (E) 3050138
+    Time to implement (T)   47 hours, 4 minutes
+    Est Delivered Bugs (B)  7
+    Cyclomatic Complexity   80
+    Maintainability (MI)    57
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
-00004-007FF  1755  289  
+00004-007FF  1807  237  
 00800-00FFF     0  2048  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  

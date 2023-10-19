@@ -1,4 +1,2 @@
->>> Warning 230 "main.c" Line 110(32,33): String truncated
->>> Warning 202 "main.c" Line 110(9,20): Variable never used:   senha_admin
-      Memory usage:   ROM=21%      RAM=6% - 10%
-      0 Errors,  2 Warnings.
+      Memory usage:   ROM=22%      RAM=5% - 10%
+      0 Errors,  0 Warnings.

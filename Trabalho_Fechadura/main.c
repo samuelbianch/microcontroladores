@@ -91,24 +91,59 @@ void desenhaTelaInicial()
    printf(lcd_escreve, "\f1 - Cadastrar\n2 - Utilizar");
 }
 
-void desenhaTelaUtilizar(char senha[])
-{
-   printf(lcd_escreve, "\fStatus: FECHADA\nSenha: %s", senha);
-   delay_ms(200);
-}
-
 void desenhaTelaCadastrar(int userID, char senha[])
 {
    printf(lcd_escreve, "\fID User: %d\nSenha: %s", userID, senha);
 }
 
+void confereSenha(char user, char senha[])
+{
+   int8 c;
+   int1 senhaEstaCorreta = 0, userExiste = 0;
+   int16 j;
+   for (j = 0; j < 1024; j = j + 5)
+   {
+      if (user == read_ext_eeprom((int16)j))
+      {
+         userExiste = 1;
+         for (c = j + 1; c < j + 5; c++)
+         {
+            if (senha[j] == read_ext_eeprom((int16)c))
+            {
+               senhaEstaCorreta = 1;
+               break;
+            }
+         }
+      }
+   }
+
+   if (senhaEstaCorreta == 1 && userExiste == 1)
+   {
+      printf(lcd_escreve, "\fPARABENS PORTA\nABERTA!!");
+      delay_ms(3000);
+   }
+   else if (userExiste == 0)
+   {
+      printf(lcd_escreve, "\fUsuario Nao\nExiste!");
+      delay_ms(3000);
+   }
+   else if (userExiste == 1 && senhaEstaCorreta == 0)
+   {
+      printf(lcd_escreve, "\fUSenha Invalida!");
+      delay_ms(3000);
+   }
+   else
+   {
+      printf(lcd_escreve, "\fERRO AO\nAUTENTICAR!");
+      delay_ms(3000);
+   }
+}
+
 void main()
 {
    char senha[4] = "";
-   int8 cont = 0;
-   int1 senhaEstaCorreta = 1;
-   char senha_admin[4] = "0000";
-   char tmp;
+   char tmp, user;
+   int16 posMemoria = 0;
 
    setup_adc_ports(AN0);
    setup_adc(ADC_CLOCK_DIV_2);
@@ -124,14 +159,15 @@ void main()
    init_ext_eeprom();
    delay_ms(10);
 
-   // Escrevendo a senha na mem�ria
-   write_ext_eeprom(0x1, '1');
-   write_ext_eeprom(0x2, '2');
-   write_ext_eeprom(0x3, '3');
-   write_ext_eeprom(0x4, '4');
+   // Grava ID e senha do Admin
+   write_ext_eeprom(0x0, 0);
+   write_ext_eeprom(0x1, '0');
+   write_ext_eeprom(0x2, '0');
+   write_ext_eeprom(0x3, '0');
+   write_ext_eeprom(0x4, '0');
 
    int8 i;
-
+   int16 j;
    for (i = 0; i < 4; i++)
    {
       senha[i] = 0;
@@ -147,40 +183,79 @@ void main()
       {
          switch (tmp)
          {
-         case 1:
-            desenhaTelaCadastrar(tmp, senha);
+         case '1':
+            printf(lcd_escreve, "\fID User: ");
+            tmp = tc_tecla(200);
+            while (!eTeclaValida(tmp))
+            {
+               printf(lcd_escreve, "\fID User: ");
+               tmp = tc_tecla(200);
+            }
+            for (j = 0; j < 1024; j = j + 5)
+            {
+               if (tmp == read_ext_eeprom((int16)j))
+               {
+                  printf(lcd_escreve, "\fUSER JA EXISTE");
+                  delay_ms(1000);
+                  // main();
+                  break;
+               }
+            }
+            printf(lcd_escreve, "%c", tmp);
+            write_ext_eeprom(posMemoria, tmp);
+            posMemoria++;
+            printf(lcd_escreve, "\nSenha: ");
+            tmp = tc_tecla(200);
+            for (i = 0; i < 4; i++)
+            {
+               tmp = 'j';
+               while (!eTeclaValida(tmp))
+               {
+                  tmp = tc_tecla(200);
+               }
+               senha[i] = tmp;
+               printf(lcd_escreve, "%c", tmp);
+               write_ext_eeprom(posMemoria, tmp);
+               posMemoria++;
+            }
+            printf(lcd_escreve, "\fSenha cadastrada\ncom sucesso!");
+            delay_ms(1000);
+            // main();
             break;
-         case 2:
-            desenhaTelaUtilizar(senha);
+         case '2':
+            printf(lcd_escreve, "\fID User: ");
+            tmp = tc_tecla(200);
+            while (!eTeclaValida(tmp))
+            {
+               tmp = tc_tecla(200);
+            }
+            user = tmp;
+            printf(lcd_escreve, "\fStatus: FECHADA\nSenha: ");
+            for (i = 0; i < 4; i++)
+            {
+               tmp = 'j';
+               while (!eTeclaValida(tmp))
+               {
+                  tmp = tc_tecla(200);
+               }
+               printf(lcd_escreve, "%c", tmp);
+               senha[i] = tmp;
+            }
+            confereSenha(user, senha);
+            break;
+         case '*':
+            printf(lcd_escreve, "\fLIMPANDO MEMORIA");
+            delay_ms(200);
+            for (j = 0; j < 1024; j++)
+            {
+               write_ext_eeprom(j, 'F');
+            }
+            printf(lcd_escreve, "\fMEMORIA LIMPA");
+            delay_ms(1000);
+            break;
          default:
             printf(lcd_escreve, "\fERRO DESCONHECIDO");
             break;
-         }
-         senha[cont] = tmp;
-         cont++;
-         delay_ms(200);
-      }
-
-      if (cont == 4)
-      {
-         for (i = 0; i < cont; i++)
-         {
-            printf(lcd_escreve, "\fPosicao[%d]: %d", i + 1, read_ext_eeprom((int16)i + 1));
-            delay_ms(1000);
-            if (senha[i] != read_ext_eeprom((int16)i + 1))
-            {
-               senhaEstaCorreta = 0;
-            }
-         }
-         if (senhaEstaCorreta == 1)
-         {
-            printf(lcd_escreve, "\fPARABENS PORTA\nABERTA!!");
-            delay_ms(10000);
-         }
-         else
-         {
-            printf(lcd_escreve, "\fSENHA INCORRETA!");
-            delay_ms(10000);
          }
       }
    }
