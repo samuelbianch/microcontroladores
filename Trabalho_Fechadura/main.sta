@@ -1,18 +1,18 @@
 
-ROM used: 1811 (22%)
-          1811 (22%) including unused fragments
+ROM used: 1832 (22%)
+          1832 (22%) including unused fragments
 
           1 Average locations per line
           5 Average locations per statement
 
 RAM used: 18 (5%) at main() level
-          38 (10%) worst case
+          40 (11%) worst case
 
 Stack used: 5 worst case (out of 8 total available)
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  263   134  38  main.c
+  279   142  39  main.c
   326     0   0  ..\..\Programas\PICC\Devices\16F877A.h
   409     0   0  ..\..\Programas\PICC\Drivers\string.h
    28     0   0  ..\..\Programas\PICC\Drivers\stddef.h
@@ -20,10 +20,10 @@ Lines Stmts  %   Files
    37     0   0  ..\..\Programas\PICC\Drivers\stdio.h
    14     0   0  stdbool.h
   165    75  21  mod_lcd.c
-   56   123  35  kbd_ext_board2.c
+   56   123  34  kbd_ext_board2.c
    87    23   6  2408.c
 ----- -----
- 1413   355 Total
+ 1429   363 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -39,47 +39,48 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     74   4   1             @I2C_WRITE_1
 0     13   1   0    32  1.0  init_ext_eeprom
 0     59   3   1    84  2.4  ext_eeprom_ready
-0     82   5   4   200  4.5  write_ext_eeprom
+0     82   4   4   200  4.5  write_ext_eeprom
 0    203  11   4   336  5.2  read_ext_eeprom
 0     32   2   1   250  6.4  eTeclaValida
 0     24   1   1    70  1.5  desenhaTelaInicial
 0      9   0   0             @const219
 0     70   4   3             @PSTRINGC7_173
-0     14   1   0  2075 10.6  @const221
+0     14   1   0             @const221
 0     12   1   0             @const225
-0    137   8  10  1013  7.5  confereSenha
-0     13   1   0             @const242
-0     11   1   0   631  7.0  @const243
-0      9   0   0  3627 10.0  @const244
-0     11   1   0  3627 10.0  @const245
-0    428  24  10  3658 10.0  MAIN
-0      6   0   0             @const254
-0      6   0   0             @const255
-0      8   0   0             @const256
-0      5   0   0             @const258
-0     16   1   0             @const260
+0    145   8  11  1177  7.7  confereSenha
+0     13   1   0             @const244
+0     11   1   0             @const245
+0      9   0   0             @const246
+0     11   1   0             @const247
+0     42   2   4   251  5.0  confereUserJaExiste
+0      8   0   0             @const251
+0    399  22  10  3380  9.0  MAIN
+0      6   0   0             @const260
 0      6   0   0             @const261
-0     13   1   0             @const262
-0      9   0   0             @const264
-0      8   0   0             @const265
-0     10   1   0             @const266
+0      5   0   0             @const263
+0     16   1   0             @const265
+0      6   0   0             @const266
+0     13   1   0             @const267
+0      9   0   0             @const269
+0      8   0   0             @const270
+0     10   1   0             @const271
 
 Program metrics:
-    Functions               18
-    Statements              355
-    Comments                247
-    Volume (V)              30528
-    Difficilty (D)          99.9
-    Effort to implement (E) 3050138
-    Time to implement (T)   47 hours, 4 minutes
-    Est Delivered Bugs (B)  7
-    Cyclomatic Complexity   80
-    Maintainability (MI)    57
+    Functions               15
+    Statements              363
+    Comments                246
+    Volume (V)              15760
+    Difficilty (D)          65.8
+    Effort to implement (E) 1037412
+    Time to implement (T)   16 hours, 1 minutes
+    Est Delivered Bugs (B)  3
+    Cyclomatic Complexity   46
+    Maintainability (MI)    82
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
-00004-007FF  1807  237  
+00004-007FF  1828  216  
 00800-00FFF     0  2048  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  

@@ -100,19 +100,27 @@ void confereSenha(char user, char senha[])
 {
    int8 c;
    int1 senhaEstaCorreta = 0, userExiste = 0;
+   int8 digitosIguais = 0;
    int16 j;
+
    for (j = 0; j < 1024; j = j + 5)
    {
       if (user == read_ext_eeprom((int16)j))
       {
          userExiste = 1;
+         int8 i = 0;
          for (c = j + 1; c < j + 5; c++)
          {
-            if (senha[j] == read_ext_eeprom((int16)c))
+            if (senha[i] == read_ext_eeprom((int16)c))
+            {
+               digitosIguais++;
+            }
+            if (digitosIguais == 4)
             {
                senhaEstaCorreta = 1;
                break;
             }
+            i++;
          }
       }
    }
@@ -129,7 +137,7 @@ void confereSenha(char user, char senha[])
    }
    else if (userExiste == 1 && senhaEstaCorreta == 0)
    {
-      printf(lcd_escreve, "\fUSenha Invalida!");
+      printf(lcd_escreve, "\fSenha Invalida!");
       delay_ms(3000);
    }
    else
@@ -137,6 +145,22 @@ void confereSenha(char user, char senha[])
       printf(lcd_escreve, "\fERRO AO\nAUTENTICAR!");
       delay_ms(3000);
    }
+}
+
+int1 confereUserJaExiste(char user)
+{
+   int16 j;
+   for (j = 0; j < 1024; j = j + 5)
+   {
+      if (user == read_ext_eeprom((int16)j))
+      {
+         printf(lcd_escreve, "\fUSER JA EXISTE");
+         delay_ms(1000);
+         return 0;
+      }
+   }
+
+   return 1;
 }
 
 void main()
@@ -191,16 +215,8 @@ void main()
                printf(lcd_escreve, "\fID User: ");
                tmp = tc_tecla(200);
             }
-            for (j = 0; j < 1024; j = j + 5)
-            {
-               if (tmp == read_ext_eeprom((int16)j))
-               {
-                  printf(lcd_escreve, "\fUSER JA EXISTE");
-                  delay_ms(1000);
-                  // main();
-                  break;
-               }
-            }
+            if (!confereUserJaExiste(tmp))
+               break;
             printf(lcd_escreve, "%c", tmp);
             write_ext_eeprom(posMemoria, tmp);
             posMemoria++;
